@@ -51,8 +51,8 @@ const errorLink = onError(
 );
 
 const httpLink = createHttpLink({
-	uri: 'https://upstudents.herokuapp.com/graphql',
-	// Uri: 'http://localhost:3000/graphql',
+	// Uri: 'https://upstudents.herokuapp.com/graphql',
+	uri: 'http://localhost:3000/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

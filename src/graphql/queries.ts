@@ -37,6 +37,7 @@ export const GET_RESULTS = graphql(`
     listUserResults {
       id
       quizTitle
+      quizId
       points
       total
     }
@@ -48,6 +49,35 @@ export const GET_CREATED = graphql(`
     listCreated {
       id
       title
+    }
+  }
+`);
+
+export const GET_QUIZ = graphql(`
+  query GetQuiz($id: String!) { 
+    quiz(id: $id) {
+      id
+      title
+      questions {
+        id
+        text
+        answers {
+          id
+          text
+          valid
+        }
+      }
+    }
+  }
+`);
+
+export const GET_QUIZ_RESULTS = graphql(`
+  query GetQuizResults($data: ListQuizResultsInput!) { 
+    listQuizResults(data: $data) {
+        id
+        points
+        total
+        userFullName
     }
   }
 `);

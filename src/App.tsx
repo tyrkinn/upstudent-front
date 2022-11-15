@@ -8,8 +8,10 @@ import {CreateQuiz} from './pages/CreateQuiz';
 import {Explore} from './pages/Explore';
 import {LoginPage} from './pages/LoginPage';
 import {MainPage} from './pages/MainPage';
+import {QuizResults} from './pages/QuizResults';
 import {Results} from './pages/Results';
 import {SignUpPage} from './pages/SignUpPage';
+import {SolveQuiz} from './pages/SolveQuiz';
 import {userAtom} from './store';
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
 				<Route path='results' element={<Results />} />
 				<Route path='created' element={<Created />} />
 				<Route path='create' element={<CreateQuiz />} />
+				<Route path='solve/:quizId' element={<SolveQuiz />} />
+				<Route path='quizResult/:quizId' element={<QuizResults />} />
 				<Route path='*' element={<Navigate to='explore' />}></Route>
 			</Route>
 		</Routes>

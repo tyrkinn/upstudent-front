@@ -39,3 +39,11 @@ export const CREATE_QUIZ = graphql(`
     }
   }
 `);
+
+export const CREATE_RESULT = graphql(`
+  mutation CreateResult($data: CreateQuizResultInput!) {
+    createQuizResult(data: $data) {
+      id
+    }
+  }
+`);

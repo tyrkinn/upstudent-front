@@ -1,19 +1,20 @@
-import React from 'react';
-import {Button, Card, CardBody, CardFooter, CardHeader, Heading, HStack, Progress, Text, VStack} from '@chakra-ui/react';
-import type {GetUserResultsQuery} from '../../graphql/gql/graphql';
-import {useNavigate} from 'react-router-dom';
 
-export type ResultItemProps = {
-	resultItem: GetUserResultsQuery['listUserResults'][number];
+import React from 'react';
+import { Button, Card, CardBody, CardFooter, CardHeader, Heading, HStack, Progress, Text, VStack } from '@chakra-ui/react';
+import type { GetQuizResultsQuery } from '../../graphql/gql/graphql';
+import { useNavigate } from 'react-router-dom';
+
+export type QuizResultItemProps = {
+	resultItem: GetQuizResultsQuery['listQuizResults'][number];
 };
 
-export const ResultItem: React.FC<ResultItemProps> = ({resultItem}) => {
+export const QuizResultItem: React.FC<QuizResultItemProps> = ({ resultItem }) => {
 	const navigate = useNavigate();
 	return (
 		<Card w='full'>
 			<CardHeader>
 				<HStack justify='space-between'>
-					<Heading size='md'>{resultItem.quizTitle}</Heading>
+					<Heading size='md'>{resultItem.userFullName}</Heading>
 				</HStack>
 			</CardHeader>
 			<CardBody pb={0}>
@@ -25,11 +26,7 @@ export const ResultItem: React.FC<ResultItemProps> = ({resultItem}) => {
 					</HStack>
 				</VStack>
 			</CardBody>
-			<CardFooter px={5}>
-				<Button w='full' onClick={() => {
-					navigate(`/solve/${resultItem.quizId}`);
-				}}>Try again</Button>
-
+			<CardFooter>
 			</CardFooter>
 		</Card>
 

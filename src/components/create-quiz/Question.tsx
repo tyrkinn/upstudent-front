@@ -17,7 +17,6 @@ export type QuestionProps = {
 
 export const Question: React.FC<QuestionProps> = ({title, addAnswer, setTitle, answers, setAnswers, setSelectedAnswer, removeQuestion}) => {
 	const [text, setText] = useState(title);
-	const [select, setSelect] = useState('');
 
 	const removeAnswer = (answerIndex: number) => () => {
 		setAnswers(prev => prev.filter((_, i) => i !== answerIndex));
@@ -69,7 +68,6 @@ export const Question: React.FC<QuestionProps> = ({title, addAnswer, setTitle, a
 
 						)}
 						<HStack w='full' spacing={2} mt={5} alignItems='center'>
-
 							<Button w='full' onClick={addAnswer}>Add Answer</Button>
 							<Button w='full' onClick={removeQuestion}>Remove question</Button>
 						</HStack>
