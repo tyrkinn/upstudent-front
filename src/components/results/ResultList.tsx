@@ -35,7 +35,7 @@ export const ResultList = () => {
 
 	return (
 		<SimpleGrid columns={4} h='full' justifyContent='space-evenly' w='full' spacing={5}>
-			{data.listUserResults.map(t => (
+			{data!.listUserResults.map(t => (
 				<ResultItem key={t.id} resultItem={t} />
 			))}
 		</SimpleGrid>

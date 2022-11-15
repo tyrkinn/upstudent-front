@@ -17,6 +17,7 @@ function App() {
 	const setUser = useSetAtom(userAtom);
 
 	useEffect(() => {
+		localStorage.setItem('chakra-ui-color-mode', 'dark');
 		const accessToken = localStorage.getItem('accessToken');
 		if (accessToken) {
 			if (data) {

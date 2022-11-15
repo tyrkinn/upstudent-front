@@ -48,7 +48,7 @@ export const Sidebar = forwardRef<StackProps, 'div'>(({...props}, ref) => {
 		<VStack {...props} ref={ref} h='full' py={5} px={5} bgColor='gray.900' roundedRight='2xl'>
 			<HStack w='full' justifyContent={'space-between'}>
 				<Logo />
-				<UserIcon user={data.me} loading={loading} />
+				<UserIcon user={data!.me} loading={loading} />
 			</HStack>
 			<LinkList h='full' />
 		</VStack>
