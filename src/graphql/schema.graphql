@@ -1,0 +1,200 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Answer {
+  id: ID!
+  text: String!
+  valid: Boolean!
+}
+
+input AnswersForQuizCreation {
+  text: String!
+  valid: Boolean!
+}
+
+type Auth {
+  """JWT access token"""
+  accessToken: JWT!
+
+  """JWT refresh token"""
+  refreshToken: JWT!
+  user: User!
+}
+
+input ChangePasswordInput {
+  newPassword: String!
+  oldPassword: String!
+}
+
+input CheckAuthorInput {
+  quizId: String!
+}
+
+type CheckAuthorResult {
+  isAuthor: Boolean!
+}
+
+input CreateAnswerInput {
+  text: String!
+  valid: Boolean!
+}
+
+input CreateFullQuizInput {
+  questions: [QuestionForQuizCreation!]!
+  title: String!
+}
+
+input CreateQuestionInput {
+  answers: [CreateAnswerInput!]!
+  quizId: String!
+  text: String!
+}
+
+input CreateQuizInput {
+  title: String!
+}
+
+input CreateQuizResultInput {
+  answerIds: [String!]!
+  quizId: String!
+}
+
+input IsValidInput {
+  id: String!
+}
+
+type IsValidResult {
+  isValid: Boolean!
+}
+
+"""
+A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
+"""
+scalar JWT
+
+type ListQuizResults {
+  id: String!
+  points: Int!
+  total: Int!
+  userFullName: String!
+}
+
+input ListQuizResultsInput {
+  quizId: String!
+}
+
+type ListUserResultsOutput {
+  id: String!
+  points: Int!
+  quizTitle: String!
+  total: Int!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  changePassword(data: ChangePasswordInput!): User!
+  createFullQuiz(data: CreateFullQuizInput!): Quiz!
+  createQuestion(data: CreateQuestionInput!): Question!
+  createQuiz(data: CreateQuizInput!): Quiz!
+  createQuizResult(data: CreateQuizResultInput!): QuizResult!
+  login(data: LoginInput!): Auth!
+  refreshToken(token: JWT!): Token!
+  removeAnswer(id: String!): Answer!
+  removeQuestion(id: String!): Question!
+  removeQuiz(id: String!): Quiz!
+  signup(data: SignupInput!): Auth!
+  updateAnswer(data: UpdateAnswerInput!): Answer!
+  updateQuiz(data: UpdateQuizInput!): Quiz!
+  updateText(updateQuestionInput: UpdateQuestionInput!): Question!
+  updateUser(data: UpdateUserInput!): User!
+}
+
+type Query {
+  allQuizes: [Quiz!]!
+  checkAuthor(data: CheckAuthorInput!): CheckAuthorResult!
+  hello(name: String!): String!
+  helloWorld: String!
+  isValid(data: IsValidInput!): IsValidResult!
+  listCreated: [Quiz!]!
+  listQuizResults(data: ListQuizResultsInput!): [ListQuizResults!]!
+  listUserResults: [ListUserResultsOutput!]!
+  me: User!
+  question(id: String!): Question!
+  quiz(id: String!): Quiz!
+}
+
+type Question {
+  answers: [Answer!]!
+  id: ID!
+  text: String!
+}
+
+input QuestionForQuizCreation {
+  answers: [AnswersForQuizCreation!]!
+  text: String!
+}
+
+type Quiz {
+  author: User!
+  id: ID!
+  questions: [Question!]!
+  results: [QuizResult!]!
+  title: String!
+}
+
+type QuizResult {
+  id: ID!
+  points: Int!
+  quiz: Quiz!
+  user: User!
+}
+
+input SignupInput {
+  email: String!
+  firstname: String!
+  lastname: String!
+  password: String!
+}
+
+type Token {
+  """JWT access token"""
+  accessToken: JWT!
+
+  """JWT refresh token"""
+  refreshToken: JWT!
+}
+
+input UpdateAnswerInput {
+  id: String!
+  text: String
+  valid: Boolean
+}
+
+input UpdateQuestionInput {
+  id: String!
+  text: String
+}
+
+input UpdateQuizInput {
+  id: String!
+  title: String
+}
+
+input UpdateUserInput {
+  firstname: String
+  lastname: String
+}
+
+type User {
+  createdQuizes: [Quiz!]!
+  email: String!
+  firstname: String
+  id: ID!
+  lastname: String
+  results: [QuizResult!]!
+}
