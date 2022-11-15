@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { graphql } from './gql/gql';
+import {graphql} from './gql/gql';
 
 export const CHECK_AUTHOR = graphql(`
 query CheckAuthor {

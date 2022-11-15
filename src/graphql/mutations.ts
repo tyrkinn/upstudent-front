@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { graphql } from './gql/gql';
+import {graphql} from './gql/gql';
 
 export const REFRESH_TOKEN = graphql(`
 mutation RefreshToken($token: JWT!) {

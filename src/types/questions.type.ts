@@ -1,9 +1,9 @@
 export type AnswerBuilder = {
-  text: string;
-  valid: boolean;
+	text: string;
+	valid: boolean;
 };
 
 export type QuestionBuilder = {
-  text: string;
-  answers: AnswerBuilder[];
+	text: string;
+	answers: AnswerBuilder[];
 };

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import type { NormalizedCacheObject } from '@apollo/client';
-import { createHttpLink, fromPromise, from } from '@apollo/client';
-import { InMemoryCache, ApolloClient } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { clearTokens } from '../utils';
-import { REFRESH_TOKEN } from './mutations';
-import { onError } from '@apollo/client/link/error';
+import type {NormalizedCacheObject} from '@apollo/client';
+import {createHttpLink, fromPromise, from} from '@apollo/client';
+import {InMemoryCache, ApolloClient} from '@apollo/client';
+import {setContext} from '@apollo/client/link/context';
+import {clearTokens} from '../utils';
+import {REFRESH_TOKEN} from './mutations';
+import {onError} from '@apollo/client/link/error';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -16,12 +16,12 @@ const getNewToken = async (): Promise<string> => {
 		throw new Error();
 	}
 
-	const { data } = await apolloClient.mutate({ mutation: REFRESH_TOKEN, variables: { token } });
+	const {data} = await apolloClient.mutate({mutation: REFRESH_TOKEN, variables: {token}});
 	return data!.refreshToken.accessToken as string;
 };
 
 const errorLink = onError(
-	({ graphQLErrors, operation, forward }) => {
+	({graphQLErrors, operation, forward}) => {
 		if (graphQLErrors) {
 			for (const err of graphQLErrors) {
 				switch (err.extensions.code) {
@@ -55,7 +55,7 @@ const httpLink = createHttpLink({
 	uri: 'http://localhost:3000/graphql',
 });
 
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext((_, {headers}) => {
 	const token = localStorage.getItem('accessToken');
 	return {
 		headers: {
