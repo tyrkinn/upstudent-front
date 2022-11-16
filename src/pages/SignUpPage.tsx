@@ -18,6 +18,7 @@ export const SignUpPage = () => {
 
 		if (formData.get('password') !== formData.get('password_repeat')) {
 			toast({status: 'error', title: 'Password must match'});
+			return;
 		}
 
 		const data = {
@@ -27,16 +28,20 @@ export const SignUpPage = () => {
 			email: formData.get('email') as string,
 		};
 
-		console.log(data);
+		const res = await signup({
+			variables: {
+				data,
+			},
+		});
 
-		try {
-			await signup({
-				variables: {
-					data,
-				},
-			});
-		} catch (e: unknown) {
-			console.log((e as Error));
+		if (res.errors) {
+			if (res.errors.length > 0) {
+				for (const err of res.errors) {
+					toast({status: 'error', title: err.message});
+				}
+
+				return;
+			}
 		}
 
 		if (error) {
@@ -55,7 +60,7 @@ export const SignUpPage = () => {
 
 	return (
 		<Flex justify={'center'} alignItems='center' w='100vw' h='100vh'>
-			<VStack h='50%' w='full'>
+			<VStack h='90%' w='full'>
 				<Heading size='md' mb={5}>Sign up to Upstudent</Heading>
 				<VStack as='form' onSubmit={async e => formSubmit(e)} bgColor='blackAlpha.300' py={10} px={20} rowGap={5} w={'30%'} shadow='lg' rounded='lg'>
 					<FormControl>

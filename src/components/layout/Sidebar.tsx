@@ -9,7 +9,7 @@ import {UserIcon} from './UserIcon';
 import {useQuery} from '@apollo/client';
 import {ME} from '../../graphql/queries';
 import {LinkList} from '../sidebar/LinkList';
-import {useNavigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 
 export const Sidebar = forwardRef<StackProps, 'div'>(({...props}, ref) => {
 	const {data, loading, error, refetch} = useQuery(ME);
@@ -32,12 +32,6 @@ export const Sidebar = forwardRef<StackProps, 'div'>(({...props}, ref) => {
 		});
 	}, []);
 
-	useEffect(() => {
-		if (data === undefined && !loading) {
-			navigate('/login');
-		}
-	}, [data]);
-
 	if (loading) {
 		return (
 			<Spinner></Spinner>
@@ -45,12 +39,19 @@ export const Sidebar = forwardRef<StackProps, 'div'>(({...props}, ref) => {
 	}
 
 	return (
-		<VStack {...props} ref={ref} h='full' py={5} px={5} bgColor='gray.900' roundedRight='2xl'>
-			<HStack w='full' justifyContent={'space-between'}>
-				<Logo />
-				<UserIcon user={data!.me} loading={loading} />
-			</HStack>
-			<LinkList h='full' />
-		</VStack>
+		data !== null
+			? (
+
+				<VStack {...props} ref={ref} h='full' py={5} px={5} bgColor='gray.900' roundedRight='2xl'>
+					<HStack w='full' justifyContent={'space-between'}>
+						<Logo />
+						<UserIcon user={data!.me} loading={loading} />
+					</HStack>
+					<LinkList h='full' />
+				</VStack>
+			)
+			: (
+				<Navigate to='/login' />
+			)
 	);
 });

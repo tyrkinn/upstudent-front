@@ -3,8 +3,10 @@ import {Accordion, Button, Container, Heading, HStack, Input, InputGroup, InputL
 import {Question} from '../components/create-quiz/Question';
 import {v4 as uuid} from 'uuid';
 import type {AnswerBuilder, QuestionBuilder} from '../types/questions.type';
-import {useMutation} from '@apollo/client';
+import {useMutation, useQuery} from '@apollo/client';
 import {CREATE_QUIZ} from '../graphql/mutations';
+import {GET_ALL_QUIZES} from '../graphql/queries';
+import {useNavigate} from 'react-router-dom';
 
 export const CreateQuiz = () => {
 	const [title, setTitle] = useState('');
@@ -12,6 +14,7 @@ export const CreateQuiz = () => {
 	const toast = useToast({position: 'top-right', isClosable: true});
 	const [sendQuiz] = useMutation(CREATE_QUIZ);
 	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
 
 	const setQuestionTitle = (questionIdx: number) => (newTitle: string) => {
 		setQuestions(prev => prev.map((q, idx) => idx === questionIdx ? {...q, text: newTitle} : q));
@@ -88,7 +91,12 @@ export const CreateQuiz = () => {
 			}
 		}
 
+		const {refetch} = useQuery(GET_ALL_QUIZES);
+		await refetch();
+
 		toast({status: 'success', title: 'Successfully created quiz'});
+
+		navigate('/explore');
 
 		setLoading(false);
 	};

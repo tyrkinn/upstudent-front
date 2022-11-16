@@ -22,18 +22,20 @@ export const SolveQuestion: React.FC<SolveQuestionProps> = ({question, addAnswer
 	};
 
 	return (
-		<VStack w='80%'>
-			<HStack>
-				<Text>{question.text}</Text>
-			</HStack>
-			<RadioGroup onChange={setAnswerId} value={answerId}>
-				<VStack>
-					{question.answers.map(a => (
-						<Radio key={a.id} value={a.id}>{a.text}</Radio>
-					))}
-				</VStack>
-			</RadioGroup>
-			<Button onClick={onAddAnswer}>Next</Button>
+		<VStack w='60%' alignItems='center' py={10} justifyContent='center' bgColor='blackAlpha.200' spacing={5} h='60%' rounded='xl'>
+			<VStack w='full' spacing={9}>
+				<HStack>
+					<Text fontWeight='semibold' fontSize='3xl'>{question.text}</Text>
+				</HStack>
+				<RadioGroup onChange={setAnswerId} bgColor='whiteAlpha.50' rounded='xl' p={10} my={5} w='40%' value={answerId}>
+					<VStack w='100%' alignItems='start' spacing={5}>
+						{question.answers.map(a => (
+							<Radio key={a.id} value={a.id}>{a.text}</Radio>
+						))}
+					</VStack>
+				</RadioGroup>
+				<Button onClick={onAddAnswer} w='30%'>Next</Button>
+			</VStack>
 		</VStack>
 	);
 };

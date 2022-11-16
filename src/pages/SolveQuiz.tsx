@@ -91,7 +91,7 @@ export const SolveQuiz = () => {
 			<HStack w='full' mb={5} bgColor='whiteAlpha.100' py={5} rounded='lg' justify='center'>
 				<Heading as='h2' size='lg'>Quiz {data.quiz.title}</Heading>
 			</HStack>
-			<VStack w='full' h='full'>
+			<VStack w='full' h='full' justifyContent='center' alignItems='center'>
 				<SolveQuestion question={questions[questionIdx]} addAnswer={addAnswer} nextQuestion={nextQuestion} />
 			</VStack>
 		</VStack>
